@@ -324,7 +324,7 @@ GameObject:
   - component: {fileID: 439803217}
   - component: {fileID: 439803218}
   m_Layer: 5
-  m_Name: Panel
+  m_Name: InterPanel
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -889,7 +889,7 @@ GameObject:
   - component: {fileID: 1404760411}
   - component: {fileID: 1404760412}
   m_Layer: 5
-  m_Name: Panel
+  m_Name: BookPanel_1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
