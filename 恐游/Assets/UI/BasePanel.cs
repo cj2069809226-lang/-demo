@@ -1,13 +1,14 @@
-using UnityEngine;
+ï»¿using UnityEngine;
 using UnityEngine.Events;
 
 public abstract class BasePanel : MonoBehaviour
 {
     private CanvasGroup canvasGroup;
-    private float alphaSpeed = 10;
+    public float ShowSpeed = 10;
+    public float HideSpeed = 10;
     private bool isShow;
 
-    //µ±µ­³ö³É¹¦Ê±µ÷ÓÃÎ¯ÍĞº¯Êı
+    //å½“æ·¡å‡ºæˆåŠŸæ—¶è°ƒç”¨å§”æ‰˜å‡½æ•°
     private UnityAction hideCallBack;
     protected virtual void Awake()
     {
@@ -23,7 +24,7 @@ public abstract class BasePanel : MonoBehaviour
         Init();
     }
     /// <summary>
-    /// Ö÷ÒªÓÃÓÚ³õÊ¼»¯ °´Å¥ÊÂ¼ş¼àÌıµÈµÈÄÚÈİ
+    /// ä¸»è¦ç”¨äºåˆå§‹åŒ– æŒ‰é’®äº‹ä»¶ç›‘å¬ç­‰ç­‰å†…å®¹
     /// </summary>
     public abstract void Init();
 
@@ -37,29 +38,29 @@ public abstract class BasePanel : MonoBehaviour
     {
         isShow = false;
         canvasGroup.alpha = 1;
-        //¼ÇÂ¼´«ÈëµÄµ±µ­³ö³É¹¦ºó»áÖ´ĞĞµÄº¯Êı
+        //è®°å½•ä¼ å…¥çš„å½“æ·¡å‡ºæˆåŠŸåä¼šæ‰§è¡Œçš„å‡½æ•°
         hideCallBack = callback;
     }
     // Update is called once per frame
     void Update()
     {
-        //µ­Èë
+        //æ·¡å…¥
         if (isShow&&canvasGroup.alpha!=1)
         {
-            canvasGroup.alpha += alphaSpeed * Time.deltaTime;
+            canvasGroup.alpha += ShowSpeed * Time.deltaTime;
             if (canvasGroup.alpha >= 1)
             {
                 canvasGroup.alpha = 1;
             }
         }
-        //µ­³ö
+        //æ·¡å‡º
         else if (!isShow)
         {
-            canvasGroup.alpha-=alphaSpeed * Time.deltaTime;
+            canvasGroup.alpha-=HideSpeed * Time.deltaTime;
             if(canvasGroup.alpha <= 0)
             {
                 canvasGroup.alpha = 0;
-                //Ó¦¸ÃÈÃ¹ÜÀíÆ÷É¾³ı×Ô¼º
+                //åº”è¯¥è®©ç®¡ç†å™¨åˆ é™¤è‡ªå·±
                 hideCallBack?.Invoke();
             }
         }

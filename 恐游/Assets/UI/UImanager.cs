@@ -1,4 +1,4 @@
-using System.Collections.Generic;
+ï»¿using System.Collections.Generic;
 using UnityEngine;
 
 public class UImanager
@@ -6,49 +6,49 @@ public class UImanager
    private static UImanager instance=new UImanager();
     public static UImanager Instance => instance;
 
-    //´æ´¢Ãæ°åµÄÈİÆ÷
+    //å­˜å‚¨é¢æ¿çš„å®¹å™¨
     private Dictionary<string,BasePanel> panelDic = new Dictionary<string,BasePanel>();
-    //Ó¦¸ÃÒ»¿ªÊ¼¾ÍµÃµ½canvas¶ÔÏó
+    //åº”è¯¥ä¸€å¼€å§‹å°±å¾—åˆ°canvaså¯¹è±¡
     private Transform canvasTrans;
     private UImanager()
     {
-        //µÃµ½³¡¾°ÉÏ´´½¨ºÃµÄcanvas¶ÔÏó
+        //å¾—åˆ°åœºæ™¯ä¸Šåˆ›å»ºå¥½çš„canvaså¯¹è±¡
         canvasTrans=GameObject.Find("Canvas").transform;
-        //ÈÃcanvas¶ÔÏó¹ı³¡¾°²»ÒÆ³ı
-        //ÎÒÃÇ¶¼ÊÇÍ¨¹ı¶¯Ì¬´´½¨ºÍ¶¯Ì¬É¾³ıÁ©ÏÔÊ¾Òş²ØÃæ°åµÄ£¬ËùÒÔÉ¾³ıËüÓ°Ïì²»´ó
+        //è®©canvaså¯¹è±¡è¿‡åœºæ™¯ä¸ç§»é™¤
+        //æˆ‘ä»¬éƒ½æ˜¯é€šè¿‡åŠ¨æ€åˆ›å»ºå’ŒåŠ¨æ€åˆ é™¤ä¿©æ˜¾ç¤ºéšè—é¢æ¿çš„ï¼Œæ‰€ä»¥åˆ é™¤å®ƒå½±å“ä¸å¤§
         GameObject.DontDestroyOnLoad(canvasTrans.gameObject);
     }
 
-    //ÏÔÊ¾Ãæ°å
+    //æ˜¾ç¤ºé¢æ¿
     public T ShowPanel<T>() where T : BasePanel
     {
-        //ÎÒÃÇÖ»ĞèÒª±£Ö¤·ºĞÍTµÄÀàĞÍºÍÃæ°åÃûÒ»ÖÂ¶¨Ò»¸öÕâÑùµÄ¹æÔò¾Í·Ç³£·½±ãÊ¹ÓÃ
+        //æˆ‘ä»¬åªéœ€è¦ä¿è¯æ³›å‹Tçš„ç±»å‹å’Œé¢æ¿åä¸€è‡´å®šä¸€ä¸ªè¿™æ ·çš„è§„åˆ™å°±éå¸¸æ–¹ä¾¿ä½¿ç”¨
         string panelName=typeof(T).Name;
 
-        //ÊÇ·ñÒÑ¾­ÓĞÏÔÊ¾×ÅµÄÃæ°åÁË£¬Èç¹ûÓĞ£¬²»ÓÃ´´½¨Ö±½Ó·µ»Ø
+        //æ˜¯å¦å·²ç»æœ‰æ˜¾ç¤ºç€çš„é¢æ¿äº†ï¼Œå¦‚æœæœ‰ï¼Œä¸ç”¨åˆ›å»ºç›´æ¥è¿”å›
         if(panelDic.ContainsKey(panelName))
         {
             return (T)panelDic[panelName];
         }
-        //ÏÔÊ¾Ãæ°å¾ÍÊÇ´´½¨Ãæ°åÔ¤ÉèÌå ÉèÖÃ¸¸¶ÔÏó
-        //¸ù¾İµÃµ½µÄÀàÃû¾ÍÊÇÎÒÃÇµÄÔ¤ÉèÍ·Ãæ°åÃû£¬Ö±½Ó¶¯Ì¬´´½¨Ëû¼´¿É
+        //æ˜¾ç¤ºé¢æ¿å°±æ˜¯åˆ›å»ºé¢æ¿é¢„è®¾ä½“ è®¾ç½®çˆ¶å¯¹è±¡
+        //æ ¹æ®å¾—åˆ°çš„ç±»åå°±æ˜¯æˆ‘ä»¬çš„é¢„è®¾å¤´é¢æ¿åï¼Œç›´æ¥åŠ¨æ€åˆ›å»ºä»–å³å¯
         GameObject panelObj = GameObject.Instantiate(Resources.Load<GameObject>("UI/" + panelName));
         panelObj.transform.SetParent(canvasTrans,false);
 
-        //½Ó×Å¾ÍÊÇµÃµ½¶ÔÓ¦µÄÃæ°å½Å±¾´æ´¢ÆğÀ´
+        //æ¥ç€å°±æ˜¯å¾—åˆ°å¯¹åº”çš„é¢æ¿è„šæœ¬å­˜å‚¨èµ·æ¥
         T panel=panelObj.GetComponent<T>();
-        //°ÑÃæ°å½Å±¾´æ´¢µ½¶ÔÓ¦ÈİÆ÷ÖĞ£¬Ö®ºó·½±ãÎÒÃÇ»ñÈ¡Ëû
+        //æŠŠé¢æ¿è„šæœ¬å­˜å‚¨åˆ°å¯¹åº”å®¹å™¨ä¸­ï¼Œä¹‹åæ–¹ä¾¿æˆ‘ä»¬è·å–ä»–
         panelDic.Add(panelName, panel);
-        //µ÷ÓÃÏÔÊ¾×Ô¼ºµÄÂß¼­
+        //è°ƒç”¨æ˜¾ç¤ºè‡ªå·±çš„é€»è¾‘
         panel.ShowMe();
         return panel;
     }
 
-    //Òş²ØÃæ°å
-    //²ÎÊıÒ»£ºÈç¹ûÏ£Íûµ­³ö¾ÍÄ¬ÈÏ´«true£¬Ö±½ÓÉ¾³ı´«false
+    //éšè—é¢æ¿
+    //å‚æ•°ä¸€ï¼šå¦‚æœå¸Œæœ›æ·¡å‡ºå°±é»˜è®¤ä¼ trueï¼Œç›´æ¥åˆ é™¤ä¼ false
     public void HidePanel<T>(bool isFade=true) where T : BasePanel
     {
-        //¸ù¾İ·ºĞÍµÃµ½Ãæ°åÃû×Ö
+        //æ ¹æ®æ³›å‹å¾—åˆ°é¢æ¿åå­—
         string panelName = typeof(T).Name;
 
         if(panelDic.ContainsKey(panelName) )
@@ -57,23 +57,23 @@ public class UImanager
             {
                 panelDic[panelName].HideMe(() =>
                 {
-                    //Ãæ°åµ­³ö³É¹¦ºóÏ£ÍûÉ¾³ıÃæ°å
+                    //é¢æ¿æ·¡å‡ºæˆåŠŸåå¸Œæœ›åˆ é™¤é¢æ¿
                     GameObject.Destroy(panelDic[panelName].gameObject);
-                    //É¾³ıÃæ°åºó´Ó×ÖµäÖĞÒÆ³ı
+                    //åˆ é™¤é¢æ¿åä»å­—å…¸ä¸­ç§»é™¤
                     panelDic.Remove(panelName);
                 });
             }
             else
             {
-                //É¾³ıÃæ°å
+                //åˆ é™¤é¢æ¿
                 GameObject.Destroy(panelDic[panelName].gameObject);
-                //É¾³ıÃæ°åºó´Ó×ÖµäÖĞÒÆ³ı
+                //åˆ é™¤é¢æ¿åä»å­—å…¸ä¸­ç§»é™¤
                 panelDic.Remove(panelName);
             }
         }
     }
 
-    //»ñµÃÃæ°å
+    //è·å¾—é¢æ¿
     public T GetPanel<T>() where T : BasePanel
     {
         string panelName=typeof(T).Name;
@@ -82,5 +82,15 @@ public class UImanager
             return panelDic[panelName] as T;
         }
         return null;
+    }
+
+    public bool IsPanelActive<T>() where T : BasePanel
+    {
+        string panelName = typeof(T).Name;
+        if (panelDic.ContainsKey(panelName))
+        {
+            return panelDic[panelName].gameObject.activeSelf;
+        }
+        return false;
     }
 }

@@ -1,11 +1,11 @@
-using UnityEngine;
+ï»¿using UnityEngine;
 using UnityEngine.UI;
 
 public class disappear : MonoBehaviour
 {
-    [Tooltip("¿ªÊ¼Ç°Í£ÁôµÄÊ±¼ä")]
+    [Tooltip("å¼€å§‹å‰åœç•™çš„æ—¶é—´")]
     public float delay = 0.8f;
-    [Tooltip("½¥ÒşÊ±³¤")]
+    [Tooltip("æ¸éšæ—¶é•¿")]
     public float durationTime = 1.5f;
 
 
