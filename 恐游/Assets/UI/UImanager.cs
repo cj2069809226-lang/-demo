@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 
 public class UImanager
@@ -93,4 +94,17 @@ public class UImanager
         }
         return false;
     }
+
+    public void ShowPanelLater<T>(float waitTime) where T : BasePanel
+    {
+        CoroutineRunner.Instance.StartCoroutine(wait<T>(waitTime));
+        
+    }
+
+    public IEnumerator wait<T>(float waitTime) where T: BasePanel
+    {
+        yield return new WaitForSeconds(waitTime);
+        ShowPanel<T>();
+    }
+    
 }

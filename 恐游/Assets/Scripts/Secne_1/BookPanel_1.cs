@@ -7,8 +7,8 @@ public class BookPanel_1 : BasePanel
     
     public override void Init()
     {
-        BackGroundManager.Instance.setBackGround("black_room");
-        Debug.Log("BookPanel_1 Init");
+        //BackGroundManager.Instance.setBackGround("black_room");
+        
         btnSure.onClick.AddListener(() =>
         {
             UImanager.Instance.HidePanel<BookPanel_1>();

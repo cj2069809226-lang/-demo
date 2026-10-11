@@ -61,7 +61,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
   m_Color: {r: 0, g: 0, b: 0, a: 1}
-  m_RaycastTarget: 1
+  m_RaycastTarget: 0
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
   m_OnCullStateChanged:
@@ -89,8 +89,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0a4312119463e46658c2d51130f3bd56, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ShowSpeed: 30
-  HideSpeed: 0.2
+  ShowSpeed: 100
+  HideSpeed: 1
   button: {fileID: 905877344599065259}
 --- !u!1 &7123025012949995668
 GameObject:

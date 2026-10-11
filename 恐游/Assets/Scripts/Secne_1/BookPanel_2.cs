@@ -7,6 +7,10 @@ public class BookPanel_2 : BasePanel
     {
         btnSure.onClick.AddListener(() =>
         {
+            
+            BackGroundManager.Instance.SetBackGround(4f, "black_room");
+            BackGroundManager.Instance.SetBackGroundwithVFX(6f, "door_close",0);
+            UImanager.Instance.ShowPanelLater<CheckPanel>(6.1f);
             UImanager.Instance.HidePanel<BookPanel_2>();
         });
     }

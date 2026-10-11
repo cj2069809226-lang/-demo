@@ -9,6 +9,7 @@ public class ShowBookPanel : BasePanel
     {
         btnShowBookPanel.onClick.AddListener(() =>
         {
+            //UImanager.Instance.ShowPanel<BlackImage>();
             UImanager.Instance.ShowPanel<BookPanel_1>();
             UImanager.Instance.HidePanel<ShowBookPanel>();
         });

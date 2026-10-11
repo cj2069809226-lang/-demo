@@ -32,6 +32,7 @@ public abstract class BasePanel : MonoBehaviour
     {
         isShow = true;
         canvasGroup.alpha = 0;
+        Debug.Log("panel载入");
     }
 
     public virtual void HideMe(UnityAction callback)
