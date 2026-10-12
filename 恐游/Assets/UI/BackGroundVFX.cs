@@ -1,18 +1,18 @@
-using System;
+ï»¿using System;
 using System.Collections;
 using UnityEngine;
 using UnityEngine.UI;
 
-/// <summary>»»Í¼ÄÇÒ»Ë²¼äµÄ¹ÊÕÏÌØĞ§¡£Ã»¹Ò¹ÊÕÏ shader Ò²ÄÜÅÜ£¬»á×Ô¶¯ÓÃÉÁË¸¶µµ×</summary>
+/// <summary>æ¢å›¾é‚£ä¸€ç¬é—´çš„æ•…éšœç‰¹æ•ˆã€‚æ²¡æŒ‚æ•…éšœ shader ä¹Ÿèƒ½è·‘ï¼Œä¼šè‡ªåŠ¨ç”¨é—ªçƒå…œåº•</summary>
 [RequireComponent(typeof(Image))]
 public class BackGroundVFX : MonoBehaviour
 {
-    [SerializeField] private float duration = 0.4f;      // ÌØĞ§×ÜÊ±³¤
-    [SerializeField] private float peakRatio = 0.4f;      // ×îÇ¿Ê±¿Ì£¨»»Í¼¾Í·¢ÉúÔÚÕâÀï£©
+    [SerializeField] private float duration = 0.4f;      // ç‰¹æ•ˆæ€»æ—¶é•¿
+    [SerializeField] private float peakRatio = 0.4f;      // æœ€å¼ºæ—¶åˆ»ï¼ˆæ¢å›¾å°±å‘ç”Ÿåœ¨è¿™é‡Œï¼‰
     [SerializeField] private string amountProperty = "_GlitchAmount";
 
     private Image _image;
-    private Material _mat;              // ÓĞ¹ÊÕÏ shader Ê±ÓÃ
+    private Material _mat;              // æœ‰æ•…éšœ shader æ—¶ç”¨
     private Color _baseColor = Color.white;
 
     private void Awake()
@@ -20,10 +20,10 @@ public class BackGroundVFX : MonoBehaviour
         _image = GetComponent<Image>();
         _baseColor = _image.color;
         if (_image.material != null && _image.material.HasProperty(amountProperty))
-            _mat = _image.material;     // ÄÃµ½µÄÊÇ²ÄÖÊÊµÀı£¬¿ÉÒÔ·ÅĞÄ¸Ä
+            _mat = _image.material;     // æ‹¿åˆ°çš„æ˜¯æè´¨å®ä¾‹ï¼Œå¯ä»¥æ”¾å¿ƒæ”¹
     }
 
-    /// <summary>²¥Ò»´ÎÌØĞ§£¬²¢ÔÚ"×îÇ¿ÄÇÒ»Ö¡"»Øµ÷ onPeak£¨ÍâÃæ¾ÍÔÚÄÇÀï»»Í¼£©</summary>
+    /// <summary>æ’­ä¸€æ¬¡ç‰¹æ•ˆï¼Œå¹¶åœ¨"æœ€å¼ºé‚£ä¸€å¸§"å›è°ƒ onPeakï¼ˆå¤–é¢å°±åœ¨é‚£é‡Œæ¢å›¾ï¼‰</summary>
     public IEnumerator Play(Action onPeak = null)
     {
         float t = 0f;
@@ -33,7 +33,7 @@ public class BackGroundVFX : MonoBehaviour
         {
             t += Time.unscaledDeltaTime;
             float k = Mathf.Clamp01(t / duration);
-            SetAmount(Mathf.Sin(k * Mathf.PI));            // Ç¿¶È 0 ¡ú 1 ¡ú 0
+            SetAmount(Mathf.Sin(k * Mathf.PI));            // å¼ºåº¦ 0 â†’ 1 â†’ 0
 
             if (!peaked && k >= peakRatio) { peaked = true; onPeak?.Invoke(); }
             yield return null;
@@ -52,7 +52,7 @@ public class BackGroundVFX : MonoBehaviour
     {
         if (_mat != null) { _mat.SetFloat(amountProperty, amount); return; }
 
-        // ¶µµ×£ºÃ»ÓĞ shader Ê±ÓÃËæ»úÑ¹°µÄ£ÄâĞÅºÅ²»ÎÈ
+        // å…œåº•ï¼šæ²¡æœ‰ shader æ—¶ç”¨éšæœºå‹æš—æ¨¡æ‹Ÿä¿¡å·ä¸ç¨³
         float f = UnityEngine.Random.value < amount * 0.7f ? 0.35f : 1f;
         _image.color = new Color(f, f, f, 1f);
     }

@@ -1,4 +1,4 @@
-using System.Collections;
+ï»¿using System.Collections;
 using UnityEngine;
 
 public class CoroutineRunner : MonoBehaviour
@@ -9,15 +9,15 @@ public class CoroutineRunner : MonoBehaviour
     {
         get
         {
-            if (_instance == null) // Unity µÄ¼Ù null ÅĞ¶Ï£¬¶ÔÏó±»Ïú»ÙÒ²»á½øÕâÀï
+            if (_instance == null) // Unity çš„å‡ null åˆ¤æ–­ï¼Œå¯¹è±¡è¢«é”€æ¯ä¹Ÿä¼šè¿›è¿™é‡Œ
             {
                 var go = new GameObject("[CoroutineRunner]");
                 if(go != null)
                 {
-                    Debug.Log("CoroutineRunnerÊµÀı»¯³É¹¦");
+                    Debug.Log("CoroutineRunnerå®ä¾‹åŒ–æˆåŠŸ");
                 }
                 _instance = go.AddComponent<CoroutineRunner>();
-                DontDestroyOnLoad(go);// ÇĞ³¡¾°Ò²²»Ïú»Ù
+                DontDestroyOnLoad(go);// åˆ‡åœºæ™¯ä¹Ÿä¸é”€æ¯
             }
             return _instance;
         }
