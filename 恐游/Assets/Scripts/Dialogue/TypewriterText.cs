@@ -22,16 +22,19 @@ namespace Kongyou.Dialogue
         public TMP_Text target;
 
         [Tooltip("每秒显示多少个字")]
-        public float charsPerSecond = 28f;
+        public float charsPerSecond = 20f;
 
         [Tooltip("句末标点（。！？…）后面的停顿")]
-        public float sentencePause = 0.22f;
+        public float sentencePause = 0.3f;
 
         [Tooltip("逗号类标点（，、；：）后面的停顿")]
-        public float commaPause = 0.11f;
+        public float commaPause = 0.2f;
 
         [Tooltip("按住快进键时的速度倍率")]
         public float fastForwardMultiplier = 12f;
+
+        [Tooltip("单帧最多推进多少秒。进场景卡顿、第一次搭对话框、动态字体生成图集都可能让某一帧膨胀到零点几秒，不封顶就会一口气把整句吐完")]
+        public float maxStepDeltaTime = 0.1f;
 
         [Tooltip("用不受 timeScale 影响的时间，游戏暂停时也能正常打字")]
         public bool useUnscaledTime = true;
@@ -112,6 +115,11 @@ namespace Kongyou.Dialogue
             if (!IsTyping) return;
 
             float dt = useUnscaledTime ? Time.unscaledDeltaTime : Time.deltaTime;
+
+            // 进场景、第一次搭 UI、动态字体生成图集，这些都可能让某一帧花掉零点几秒。
+            // 那一帧的 deltaTime 就是这么大的值，下面的 while 会把它当成"打字时间"一次消耗掉，
+            // 于是整句在同一帧里全冒出来，看起来就像打字机没生效。这里给单帧设个上限。
+            if (maxStepDeltaTime > 0f) dt = Mathf.Min(dt, maxStepDeltaTime);
 
             // 先消化标点和 <pause> 带来的停顿
             if (_wait > 0f)
